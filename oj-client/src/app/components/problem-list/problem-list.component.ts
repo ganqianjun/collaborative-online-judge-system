@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Problem } from '../../models/problem.model';
+
+
 
 @Component({
   selector: 'app-problem-list',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./problem-list.component.css']
 })
 export class ProblemListComponent implements OnInit {
+  problems: Problem[];
 
-  constructor() { }
+  constructor(@Inject('data') private dataService) { }
 
   ngOnInit() {
+    this.getProblems();
+  }
+
+  getProblems(): void{
+    this.problems = this.dataService.getProblems();
   }
 
 }

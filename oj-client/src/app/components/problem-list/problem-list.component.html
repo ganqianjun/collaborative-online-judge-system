@@ -1,3 +1,12 @@
-<p>
-  problem-list works!
-</p>
+<div class="container">
+  <div class="starter-template">
+    <h1>Collaborative Online Judge System</h1>
+    <p class="lead">This is a collaborative online judge system.<br> You could edit the same problem with your teammates together.</p>
+  </div>
+  <div class="list-group">
+    <a class="list-group-item" *ngFor="let problem of problems">
+      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">{{problem.difficulty}}</span>
+      <strong class="title">{{problem.id}}. {{problem.name}}</strong>
+    </a>
+  </div>
+</div>

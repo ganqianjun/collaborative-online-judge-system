@@ -1,0 +1,39 @@
+body {
+  padding-top: 5rem;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.difficulty {
+  min-width: 65px;
+  margin-right: 10px;
+}
+
+.label.difficulty {
+  padding-top: 0.6em;
+  color: #fbfdfa;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 1.2em;
+}
+
+.diff-easy {
+  background-color: #b2cfc8;
+}
+
+.diff-medium {
+  background-color: #bbbdb9;
+}
+
+.diff-hard {
+  background-color: #a6b3b0;
+}
+
+.diff-super {
+  background-color: #5b6663;
+}
