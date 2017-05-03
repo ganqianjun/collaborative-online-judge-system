@@ -5,8 +5,8 @@
   </div>
   <div class="list-group">
     <a class="list-group-item" *ngFor="let problem of problems">
-      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">{{problem.difficulty}}</span>
-      <strong class="title">{{problem.id}}. {{problem.name}}</strong>
+      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">{{ toTitleCase(problem.difficulty) }}</span>
+      <strong class="title">{{ problem.id }}. {{ toTitleCase(problem.name) }}</strong>
     </a>
   </div>
 </div>

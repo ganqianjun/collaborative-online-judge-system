@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Problem } from '../../models/problem.model';
 
-
-
 @Component({
   selector: 'app-problem-list',
   templateUrl: './problem-list.component.html',
@@ -21,4 +19,9 @@ export class ProblemListComponent implements OnInit {
     this.problems = this.dataService.getProblems();
   }
 
+  toTitleCase(str): string {
+    return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
 }

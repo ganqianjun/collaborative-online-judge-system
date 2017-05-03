@@ -10,6 +10,7 @@ body {
 .difficulty {
   min-width: 65px;
   margin-right: 10px;
+  /*text-transform: capitalize;*/
 }
 
 .label.difficulty {
@@ -20,6 +21,7 @@ body {
 
 .title {
   font-size: 1.2em;
+  /*text-transform: capitalize;*/
 }
 
 .diff-easy {

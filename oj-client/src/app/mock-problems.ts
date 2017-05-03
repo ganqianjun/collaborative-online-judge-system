@@ -23,13 +23,13 @@ export const PROBLEMS : Problem[] = [
   },
   {
     id: 4,
-    name: "Triangle Count",
+    name: "triangle count",
     desc: `Given an array of integers, how many three numbers can be found in the array, so that we can build an triangle whose three edges length is the three numbers that we find?`,
     difficulty: "hard"
   },
   {
     id: 5,
-    name: "Sliding Window Maximum",
+    name: "Sliding window maximum",
     desc: `Given an array of n integer with duplicate number, and a moving window(size k), move the window at each iteration from the start of the array, find the maximum number inside the window at each moving.`,
     difficulty: "super"
   }
