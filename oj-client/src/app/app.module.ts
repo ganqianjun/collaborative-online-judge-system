@@ -5,18 +5,25 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ProblemListComponent } from './components/problem-list/problem-list.component';
+import { ProblemDetailComponent } from './components/problem-detail/problem-detail.component';
+import { NewProblemComponent } from './components/new-problem/new-problem.component';
 
 import { DataService } from './services/data.service';
+
+import { routing } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProblemListComponent
+    ProblemListComponent,
+    ProblemDetailComponent,
+    NewProblemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [{
     provide: 'data',

@@ -1,12 +1,21 @@
 <div class="container">
   <div class="starter-template">
     <h1>Collaborative Online Judge System</h1>
-    <p class="lead">This is a collaborative online judge system.<br> You could edit the same problem with your teammates together.</p>
+    <p class="lead">
+      This is a collaborative online judge system.<br>
+      You could edit the same problem with your teammates together.
+    </p>
   </div>
+   <app-new-problem></app-new-problem>
   <div class="list-group">
-    <a class="list-group-item" *ngFor="let problem of problems">
-      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">{{ toTitleCase(problem.difficulty) }}</span>
-      <strong class="title">{{ problem.id }}. {{ toTitleCase(problem.name) }}</strong>
+    <a class="list-group-item" *ngFor="let problem of problems"
+    [routerLink]="['/problems', problem.id]">
+      <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">
+        {{ toTitleCase(problem.difficulty) }}
+      </span>
+      <strong class="title">
+        {{ problem.id }}. {{ toTitleCase(problem.name) }}
+      </strong>
     </a>
   </div>
 </div>
