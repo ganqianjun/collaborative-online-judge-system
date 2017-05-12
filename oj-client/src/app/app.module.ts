@@ -10,6 +10,7 @@ import { NewProblemComponent } from './components/new-problem/new-problem.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { DataService } from './services/data.service';
+import { AuthService } from './services/auth.service';
 
 import { routing } from './app.routes';
 
@@ -27,10 +28,16 @@ import { routing } from './app.routes';
     HttpModule,
     routing
   ],
-  providers: [{
-    provide: 'data',
-    useClass: DataService
-  }],
+  providers: [
+    {
+      provide: 'data',
+      useClass: DataService
+    },
+    {
+      provide: 'auth',
+      useClass: AuthService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
