@@ -299,7 +299,7 @@ var DataService = (function () {
         return this._problemSource.asObservable();
     };
     DataService.prototype.getProblem = function (id) {
-        return this.http.get('api/v1/problems/${id}')
+        return this.http.get("api/v1/problems/" + id)
             .toPromise()
             .then(function (res) { return res.json(); })
             .catch(this.handleError);
