@@ -34,9 +34,8 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">My Profile</a></li>
+              <li><a [routerLink]="['/profile']">My Profile</a></li>
               <li><a href="#">My Favorite</a></li>
-              <li><a href="#">My Friends</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="logout()">Logout</a></li>
             </ul>

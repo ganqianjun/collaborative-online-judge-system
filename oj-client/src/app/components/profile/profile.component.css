@@ -1,0 +1,26 @@
+.portrait {
+  height : 150px;
+}
+
+.profile-username {
+  text-transform: capitalize;
+}
+
+@media (max-width: 991px) {
+  .profile-align {
+    text-align: center;
+  }
+  .img-align {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .profile-align {
+    text-align: left;
+  }
+  .img-align {
+    float: right
+  }
+}
