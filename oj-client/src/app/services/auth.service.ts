@@ -1,5 +1,6 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import {　Router } from '@angular/router';
 
 // Avoid name not found warnings, because typescript
 declare var Auth0Lock: any;
@@ -11,7 +12,7 @@ export class AuthService {
   domain: string = 'ganqianjun.auth0.com'
   lock = new Auth0Lock( this.clientId, this.domain , {} );
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   public login() {
@@ -45,6 +46,7 @@ export class AuthService {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
+    this.router.navigate(['/']);
   }
 
   public getProfile() : Object {
