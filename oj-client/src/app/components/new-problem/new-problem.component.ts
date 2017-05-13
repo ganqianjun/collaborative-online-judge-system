@@ -19,7 +19,8 @@ export class NewProblemComponent implements OnInit {
   difficulties: string[] = ['Easy', 'Medium', 'Hard', 'Super'];
 
   constructor(
-    @Inject('data') private dataService
+    @Inject('data') private dataService,
+    @Inject('authGuard') private authGuardService
   ) { }
 
   addProblem() : void {
