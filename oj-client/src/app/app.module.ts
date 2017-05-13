@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { DataService } from './services/data.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { routing } from './app.routes';
 
@@ -36,6 +37,10 @@ import { routing } from './app.routes';
     {
       provide: 'auth',
       useClass: AuthService
+    },
+    {
+      provide: 'authGuard',
+      useClass: AuthGuardService
     }
   ],
   bootstrap: [AppComponent]
