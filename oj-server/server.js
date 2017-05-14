@@ -14,7 +14,7 @@ app.use('/', indexRouter);
 
 app.use('/api/v1', restRouter);
 
-app.use( function(req, res) {
+app.use( function(req, res, next) {
   res.sendFile( 'index.html', {
     root: path.join( __dirname, '../production' )
   })

@@ -9,7 +9,6 @@ import { Problem } from '../../models/problem.model';
 })
 
 export class ProblemDetailComponent implements OnInit {
-
   problem: Problem;
 
   constructor(
@@ -20,7 +19,7 @@ export class ProblemDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.dataService.getProblem(+params['id'])
-        .then( problem => this.problem = problem );
+                      .then( problem => this.problem = problem );
     })
   }
 

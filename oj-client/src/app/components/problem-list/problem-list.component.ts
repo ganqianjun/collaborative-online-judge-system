@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Problem } from '../../models/problem.model';
 import { Subscription } from 'rxjs/Subscription';
+import { Problem } from '../../models/problem.model';
 
 @Component({
   selector: 'app-problem-list',
   templateUrl: './problem-list.component.html',
   styleUrls: ['./problem-list.component.css']
 })
+
 export class ProblemListComponent implements OnInit {
   problems: Problem[];
-
   problemsSubscription: Subscription;
 
   constructor(@Inject('data') private dataService) { }
@@ -31,7 +31,8 @@ export class ProblemListComponent implements OnInit {
 
   toTitleCase(str): string {
     return str.replace(/\w\S*/g, function(txt){
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      return txt.charAt(0).toLocaleUpperCase() + txt.substr(1);
     });
   }
+
 }

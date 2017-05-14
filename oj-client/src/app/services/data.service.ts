@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Problem } from '../models/problem.model';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Http, Response, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Problem } from '../models/problem.model';
 
 @Injectable()
 export class DataService {

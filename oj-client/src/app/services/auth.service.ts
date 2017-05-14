@@ -1,4 +1,4 @@
-import { Injectable }      from '@angular/core';
+import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import {　Router } from '@angular/router';
 
@@ -9,7 +9,9 @@ declare var Auth0Lock: any;
 export class AuthService {
   // Configure Auth0
   clientId: string = 'Ud--oUb6bciUQG2pG13eYPY_tL-iTxq3';
-  domain: string = 'ganqianjun.auth0.com'
+  domain: string = 'ganqianjun.auth0.com';
+  id_token: string = 'id_token';
+  profile: string = 'profile';
   lock = new Auth0Lock( this.clientId, this.domain , {} );
 
   constructor(private router: Router) {
@@ -28,8 +30,8 @@ export class AuthService {
           reject( error );
         }
         else {
-          localStorage.setItem('profile', JSON.stringify(profile));
-          localStorage.setItem('id_token', id_token);
+          localStorage.setItem(this.profile, JSON.stringify(profile));
+          localStorage.setItem(this.id_token, id_token);
           resolve(profile);
         }
       })
@@ -39,17 +41,17 @@ export class AuthService {
   public authenticated() {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired('id_token');
+    return tokenNotExpired(this.id_token);
   }
 
   public logout() {
     // Remove token from localStorage
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('profile');
+    localStorage.removeItem(this.id_token);
+    localStorage.removeItem(this.profile);
     this.router.navigate(['/']);
   }
 
   public getProfile() : Object {
-    return JSON.parse(localStorage.getItem('profile'));
+    return JSON.parse(localStorage.getItem(this.profile));
   }
 }
