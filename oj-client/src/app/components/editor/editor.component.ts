@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 declare var ace: any;
 
@@ -32,7 +32,9 @@ def example():
   # Type your Python code here`
   }
 
-  constructor() { }
+  constructor(
+    @Inject('collaboration') private collaboration
+  ) { }
 
   ngOnInit() {
     this.editor = ace.edit('editor');
@@ -42,6 +44,8 @@ def example():
     this.editor.$blockScrolling = Infinity;
 
     this.resetEditor();
+
+    this.collaboration.init();
   }
 
   resetEditor() : void {
