@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 declare var ace: any;
 
@@ -10,6 +11,7 @@ declare var ace: any;
 
 export class EditorComponent implements OnInit {
   editor: any;
+  sessionId: string;
   language: string = 'Java';
   languages: string[] = ['Java', 'C++', 'Python'];
   defaultContent = {
@@ -33,10 +35,18 @@ def example():
   }
 
   constructor(
-    @Inject('collaboration') private collaboration
+    @Inject('collaboration') private collaboration,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.sessionId = params['id'];
+      this.initEditor();
+    })
+  }
+
+  initEditor(): void {
     this.editor = ace.edit('editor');
     this.editor.setTheme('ace/theme/eclipse');
     this.editor.setFontSize(14);
@@ -45,7 +55,15 @@ def example():
 
     this.resetEditor();
 
-    this.collaboration.init();
+    this.collaboration.init(this.editor, this.sessionId);
+    this.editor.lastAppliedChange = null;
+
+    this.editor.on('change', (delta) => {
+      console.log('Editor Component Changed: ' + JSON.stringify(delta));
+      if (delta != this.editor.lastAppliedChange) {
+        this.collaboration.change(JSON.stringify(delta));
+      }
+    })
   }
 
   resetEditor() : void {
