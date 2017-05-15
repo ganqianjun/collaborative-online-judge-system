@@ -59,7 +59,7 @@ def example():
     this.editor.lastAppliedChange = null;
 
     this.editor.on('change', (delta) => {
-      console.log('Editor Component Changed: ' + JSON.stringify(delta));
+      console.log('editor.component Changed: ' + JSON.stringify(delta));
       if (delta != this.editor.lastAppliedChange) {
         this.collaboration.change(JSON.stringify(delta));
       }
