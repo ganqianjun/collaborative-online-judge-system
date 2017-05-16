@@ -18,20 +18,32 @@ module.exports = function(io) {
 
     // listening to change event
     socket.on('change', delta => {
-      console.log('change' + socketIdToSessionId[socket.Id] + ' to: ' + delta);
-      let sessionId = socketIdToSessionId[socket.id];
-      if (sessionId in collaborations) {
-        let participants = collaborations[sessionId]['participants'];
-        for (var i = 0; i < participants.length; i++) {
-          if (socket.id != participants[i]) {
-            io.to(participants[i]).emit('change', delta);
-          }
+      console.log('editorSocketService - change' + socketIdToSessionId[socket.Id] + ' to: ' + delta);
+      eventHandler(socket.id, 'change', delta);
+    }) // end of socket.on
+
+    // listening to cursor move
+    socket.on('cursorMove', cursor => {
+      console.log('editorSocketService - cursor move : ' + cursor);
+      cursor = JSON.parse(cursor);
+      cursor['socketId'] = socket.id;
+      eventHandler(socket.id, 'cursorMove', JSON.stringify(cursor));
+    }) // end of socket.on
+  }); // end of io.on
+
+  var eventHandler = function(socketId, eventName, dataString) {
+    let sessionId = socketIdToSessionId[socketId];
+    if (sessionId in collaborations) {
+      let participants = collaborations[sessionId]['participants'];
+      for (var i = 0; i < participants.length; i++) {
+        if (socketId != participants[i]) {
+          io.to(participants[i]).emit(eventName, dataString);
         }
       }
-      else {
-        console.log('editorSocketService : sessionId doesn\'t exist in collaborations');
-      }
-    }) // end of socket.on
-  }) // end of io.on
+    }
+    else {
+      console.log('editorSocketService : sessionId doesn\'t exist in collaborations');
+    }
+  };
 
 }
