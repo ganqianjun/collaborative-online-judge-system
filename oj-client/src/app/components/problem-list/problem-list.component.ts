@@ -25,14 +25,14 @@ export class ProblemListComponent implements OnInit {
       );
   }
 
-  ngOnDestroy() {
-    this.problemsSubscription.unsubscribe();
-  }
-
   toTitleCase(str): string {
     return str.replace(/\w\S*/g, function(txt){
       return txt.charAt(0).toLocaleUpperCase() + txt.substr(1);
     });
+  }
+
+  ngOnDestroy() {
+    this.problemsSubscription.unsubscribe();
   }
 
 }

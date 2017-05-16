@@ -23,14 +23,14 @@ export class NewProblemComponent implements OnInit {
     @Inject('authGuard') private authGuardService
   ) { }
 
+  ngOnInit() {
+  }
+
   addProblem() : void {
     this.dataService.addProblem(this.newProblem)
                     .catch( error => console.log(error) );
     // to make the form empty after add a new problem
     this.newProblem = Object.assign({}, DEFAULT_PROBLEM);
-  }
-
-  ngOnInit() {
   }
 
 }

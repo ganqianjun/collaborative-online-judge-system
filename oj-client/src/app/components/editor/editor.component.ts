@@ -58,15 +58,23 @@ def example():
     this.collaboration.init(this.editor, this.sessionId);
     this.editor.lastAppliedChange = null;
 
+    // code change callback
     this.editor.on('change', (delta) => {
       console.log('editor.component Changed: ' + JSON.stringify(delta));
       if (delta != this.editor.lastAppliedChange) {
         this.collaboration.change(JSON.stringify(delta));
       }
-    })
+    });
+
+    // cursor change callback, getSelection() is a function of editor
+    this.editor.getSession().getSelection().on('changeCursor', () => {
+      // this will return a JSON including 'row' and 'column'
+      let cursor = this.editor.getSession().getSelection().getCursor();
+      this.collaboration.cursorMove(JSON.stringify(cursor));
+    });
   }
 
-  resetEditor() : void {
+  resetEditor(): void {
     console.log('reset editor');
     if (this.language === 'C++') {
       this.editor.getSession().setMode(`ace/mode/c_cpp`);
@@ -77,13 +85,13 @@ def example():
     this.editor.setValue(this.defaultContent[this.language]);
   }
 
-  setLanguage( language: string ) {
+  setLanguage(language: string): void {
     this.language = language;
     console.log('Chose language: ' + this.language);
     this.resetEditor();
   }
 
-  submit() {
+  submit(): void {
     let userCodes = this.editor.getValue();
     console.log('Submit the code : ' + userCodes);
   }
