@@ -72,6 +72,8 @@ def example():
       let cursor = this.editor.getSession().getSelection().getCursor();
       this.collaboration.cursorMove(JSON.stringify(cursor));
     });
+
+    this.collaboration.restoreBuffer();
   }
 
   resetEditor(): void {
