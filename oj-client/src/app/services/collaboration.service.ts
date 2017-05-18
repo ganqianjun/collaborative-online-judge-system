@@ -14,7 +14,7 @@ export class CollaborationService {
 
   init(editor: any, sessionId: string) : void {
     this.collaborationSocket =
-      io(window.location.origin, {query: 'sessionId' + sessionId});
+      io(window.location.origin, {query: {'sessionId': sessionId}});
 
     // this.collaborationSocket.on('message', (message) => {
     //   console.log('message from server: ' + message);
