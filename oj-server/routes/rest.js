@@ -8,6 +8,11 @@ var problemService = require('../services/problemService');
 var nodeRestClient = require('node-rest-client').Client;
 var restClient = new nodeRestClient();
 
+EXECUTOR_SERVER_URL = "http://localhost:5000/builder";
+
+//register remote method
+restClient.registerMethod('builder', EXECUTOR_SERVER_URL, 'POST');
+
 // get: /api/v1/problems
 router.get('/problems', function(req, res) {
   problemService.getProblems()
@@ -37,9 +42,24 @@ router.post('/builder', jsonParser, function(req, res) {
   const userCodes = req.body.userCodes;
   const language = req.body.language;
   console.log('rest.js : codes - ' + userCodes + ' ; language - ' + language);
-  res.json({
-    'text': 'hello from rest.js'
-  });
+  restClient.methods.builder(
+    {
+      data: {
+        code: userCodes,
+        language: language
+      },
+      headers: {
+        'content-type': 'application/json'
+      }
+    }, (data, response) => {
+      // data is the callback result
+      console.log('rest.js - Received from execution server : ' + data);
+      const text = `Build Output : ${data['build']}
+      Execute Output: ${data['run']}`;
+      data['text'] = text; // add text to data
+      res.json(data);
+    }
+  );
 });
 
 module.exports = router;
