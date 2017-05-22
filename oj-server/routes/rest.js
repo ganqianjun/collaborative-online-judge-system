@@ -5,6 +5,9 @@ var jsonParser = bodyParser.json();
 
 var problemService = require('../services/problemService');
 
+var nodeRestClient = require('node-rest-client').Client;
+var restClient = new nodeRestClient();
+
 // get: /api/v1/problems
 router.get('/problems', function(req, res) {
   problemService.getProblems()
