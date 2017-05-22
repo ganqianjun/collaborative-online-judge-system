@@ -14,6 +14,7 @@ export class EditorComponent implements OnInit {
   sessionId: string;
   language: string = 'Java';
   languages: string[] = ['Java', 'C++', 'Python'];
+  output: string;
   defaultContent = {
     'Java' : `public class Example {
     public static void main(String[] args) {
@@ -32,10 +33,11 @@ int main() {
     'Python': `class Solution:
 def example():
   # Type your Python code here`
-  }
+};
 
   constructor(
     @Inject('collaboration') private collaboration,
+    @Inject('data') private data,
     private route: ActivatedRoute
   ) { }
 
@@ -85,6 +87,7 @@ def example():
       this.editor.getSession().setMode(`ace/mode/${this.language.toLowerCase()}`);
     }
     this.editor.setValue(this.defaultContent[this.language]);
+    this.output = "";
   }
 
   setLanguage(language: string): void {
@@ -94,8 +97,15 @@ def example():
   }
 
   submit(): void {
-    let userCodes = this.editor.getValue();
+    this.output = ""; // clear previous output
+    const userCodes = this.editor.getValue();
     console.log('Submit the code : ' + userCodes);
+    const codeToRun = {
+      userCodes: userCodes,
+      language: this.language.toLocaleLowerCase()
+    };
+    this.data.buildAndRun(codeToRun)
+        .then( res => this.output = res.text );
   }
 
 }
