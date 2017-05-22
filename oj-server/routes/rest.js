@@ -49,11 +49,11 @@ router.post('/builder', jsonParser, function(req, res) {
         language: language
       },
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     }, (data, response) => {
       // data is the callback result
-      console.log('rest.js - Received from execution server : ' + data);
+      console.log('rest.js - Received from execution server : ' + JSON.stringify(data));
       const text = `Build Output : ${data['build']}
       Execute Output: ${data['run']}`;
       data['text'] = text; // add text to data
