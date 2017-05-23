@@ -1,3 +1,4 @@
+import executor_utils as eu
 import json
 
 from flask import Flask
@@ -18,10 +19,9 @@ def builder():
     code = data['code']
     language = data['language']
     print 'executor.py - get called with code %s in %s' % (code, language)
-    return jsonify({
-        'build': 'succefully',
-        'run': 'succesfully again'
-    })
+    result = eu.build_and_run(code, language)
+    return jsonify(result)
 
 if __name__ == '__main__':
+    eu.load_image()
     app.run(debug=True)
